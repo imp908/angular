@@ -64,14 +64,15 @@ export class HtTestComponent implements OnInit {
     if (changes && changes[0][1] === 2) {
       console.log(this.hot.countRows());
      
-
         if (changes[0][3] === 'yellow') {
           for (let i = 0; i < this.hot.countRows(); i++) {
+            this.hot.setDataAtCell(i,3,null);
             this.hot.setCellMeta(i, 3, 'source', ['yellow_1', 'yellow_2', 'yellow_b']);
           }
         }
 
         if (changes[0][3] === 'red') {
+          this.hot.setDataAtCell(changes[0][0], 3, null);
           this.hot.setCellMeta(changes[0][0], 3, 'source', ['red_1', 'red_2', 'red_b']);
         }
 
