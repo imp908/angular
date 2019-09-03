@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import * as Handsontable from 'handsontable';
+import Handsontable from 'handsontable';
 
 @Component({
   selector: 'app-ht-test',
@@ -18,9 +18,65 @@ export class HtTestComponent implements OnInit {
     { id: 7, name: 'Cora Fair', address: 'Sunset Boulevard' },
     { id: 8, name: 'Jack Right', address: 'Michigan Avenue' },
   ];
-  constructor() { }
+  container:any;
+
+  hot:any;
+
+  constructor() {
+
+   }
 
   ngOnInit() {
+  }
+
+  ngAfterViewInit() {
+    this.container = document.getElementById('hotId');
+    if(this.container){
+
+      this.hot = new Handsontable(this.container, {
+        data: this.dataset,
+        colHeaders: ['Car', 'Year', 'Chassis color', 'Bumper color'],
+        afterChange: this.afterDropDownChanged,
+        columns: [
+          {},
+          { type: 'numeric' },
+          {
+            type: 'dropdown',
+            source: ['yellow', 'red', 'orange', 'green', 'blue', 'gray', 'black', 'white']
+          },
+          {
+            type: 'dropdown',
+            source: ['yellow', 'red', 'orange', 'green', 'blue', 'gray', 'black', 'white']
+          }
+        ]
+      });
+
+      this.hot.addHook('afterchange', this.afterDropDownChanged);
+    
+
+    }
+  }
+
+  afterDropDownChanged = (changes, source) => {
+    console.log('afterDropDownChanged')
+    console.log(changes)
+    console.log(source)
+    if (changes && changes[0][1] === 2) {
+      console.log(this.hot.countRows());
+     
+
+        if (changes[0][3] === 'yellow') {
+          for (let i = 0; i < this.hot.countRows(); i++) {
+            this.hot.setCellMeta(i, 3, 'source', ['yellow_1', 'yellow_2', 'yellow_b']);
+          }
+        }
+
+        if (changes[0][3] === 'red') {
+          this.hot.setCellMeta(changes[0][0], 3, 'source', ['red_1', 'red_2', 'red_b']);
+        }
+
+      }
+   
   }
 
 }
