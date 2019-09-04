@@ -122,6 +122,9 @@ export class HtTestComponent implements OnInit {
       this.hot.updateSettings({
         columns: this.updateSource
       });
+
+      const set = this.hot.getSettings();
+      console.log(set);
     }
   }
 
