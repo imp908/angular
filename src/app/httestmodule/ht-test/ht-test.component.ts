@@ -50,6 +50,41 @@ export class HtTestComponent implements OnInit {
     ],
   };
 
+  updateSource = [
+    {},
+    { type: 'numeric' },
+    {
+      type: 'dropdown',
+      source: ['yellow', 'red', 'orange', 'green', 'blue', 'gray', 'black', 'white']
+    },
+    {
+      type: 'dropdown',
+      source: ['yellow', 'red', 'orange', 'green', 'blue', 'gray', 'black', 'white']
+    },
+    {
+      type: 'key-value',
+      filter: false, // Same parameter as in `autocomplete`
+      data: 'status', // The field containing the key value in your data
+      // List of source items
+      source: [
+        {
+          id: 1,
+          name: 'Ready',
+        },
+        {
+          id: 2,
+          name: 'Cancelled',
+        },
+        {
+          id: 3,
+          name: 'Done',
+        },
+      ],
+      keyProperty: 'id', // The field containing the key value in your items
+      valueProperty: 'name', // The field containing the display value in your items
+    },
+  ];
+
   constructor() {
 
    }
@@ -77,14 +112,16 @@ export class HtTestComponent implements OnInit {
             source: ['yellow', 'red', 'orange', 'green', 'blue', 'gray', 'black', 'white']
           },
           { 
-            type: 'key-value', data: 'status',
-            
+            type: 'key-value', data: 'status',            
           }
         ]
       });
 
       this.hot.addHook('afterchange', this.afterDropDownChanged);
 
+      this.hot.updateSettings({
+        columns: this.updateSource
+      });
     }
   }
 
