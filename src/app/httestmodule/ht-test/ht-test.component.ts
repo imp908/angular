@@ -18,6 +18,7 @@ export class HtTestComponent implements OnInit {
     { id: 6, name: 'Mia Fair', address: 'Rodeo Drive', kv: 'a' },
     { id: 7, name: 'Cora Fair', address: 'Sunset Boulevard', kv: 'a' },
     { id: 8, name: 'Jack Right', address: 'Michigan Avenue', kv: 'a' },
+
   ];
   container: any;
 
@@ -25,6 +26,68 @@ export class HtTestComponent implements OnInit {
 
   columnsCasual: any;
   columnsKeyValue: any;
+
+  settings = {
+    columns: [
+      {
+        type: 'key-value',
+        filter: false, // Same parameter as in `autocomplete`
+        data: 'status', // The field containing the key value in your data
+        // List of source items
+        source: [
+          {
+            id: 1,
+            name: 'Ready',
+          },
+          {
+            id: 2,
+            name: 'Cancelled',
+          },
+          {
+            id: 3,
+            name: 'Done',
+          },
+        ],
+        keyProperty: 'id', // The field containing the key value in your items
+        valueProperty: 'name', // The field containing the display value in your items
+      },
+    ],
+  };
+
+  updateSource = [
+    {},
+    { type: 'numeric' },
+    {
+      type: 'dropdown',
+      source: ['yellow', 'red', 'orange', 'green', 'blue', 'gray', 'black', 'white']
+    },
+    {
+      type: 'dropdown',
+      source: ['yellow', 'red', 'orange', 'green', 'blue', 'gray', 'black', 'white']
+    },
+    {
+      type: 'key-value',
+      filter: false, // Same parameter as in `autocomplete`
+      data: 'status', // The field containing the key value in your data
+      // List of source items
+      source: [
+        {
+          id: 1,
+          name: 'Ready',
+        },
+        {
+          id: 2,
+          name: 'Cancelled',
+        },
+        {
+          id: 3,
+          name: 'Done',
+        },
+      ],
+      keyProperty: 'id', // The field containing the key value in your items
+      valueProperty: 'name', // The field containing the display value in your items
+    },
+  ];
 
   constructor() {
 
@@ -92,7 +155,9 @@ export class HtTestComponent implements OnInit {
         columns: this.columnsCasual
       });
 
-      this.hot.updateSettings({ columns: this.columnsKeyValue} );
+      this.hot.updateSettings({ columns: this.columnsKeyValue });
+      const set = this.hot.getSettings();
+      console.log(set);
     }
   }
 
