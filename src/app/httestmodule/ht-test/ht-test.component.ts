@@ -181,8 +181,8 @@ export class HtTestComponent implements OnInit {
         this.hot.setDataAtCell(changes[0][0], 3, null);
         this.hot.setCellMeta(changes[0][0], 3, 'source', ['red_1', 'red_2', 'red_b']);
 
-        this.hot.setDataAtCell(changes[0][0], 4, null);
         this.hot.setCellMeta(changes[0][0], 4, 'source', [{ id: 0, name: 'r_1' }, { id: 1, name: 'r_2' }, { id: 2, name: 'r_b' }]);
+        this.hot.setDataAtCell(changes[0][0], 4, null);
       }
     }
   }
