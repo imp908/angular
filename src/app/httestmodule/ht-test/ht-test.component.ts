@@ -157,6 +157,10 @@ export class HtTestComponent implements OnInit {
 
       this.hot.updateSettings({ columns: this.columnsKeyValue });
       const set = this.hot.getSettings();
+      // for (let i = 0; i < this.hot.countRows(); i++) {
+      //   this.hot.setDataAtCell(i, 4, null);
+      //   this.hot.setCellMeta(i, 4, 'source', [{ id: 0, name: 'yellow_1' }, { id: 1, name: 'yellow_2' }, { id: 2, name: 'yellow_b'}]);
+      // }
       console.log(set);
     }
   }
@@ -167,6 +171,9 @@ export class HtTestComponent implements OnInit {
         for (let i = 0; i < this.hot.countRows(); i++) {
           this.hot.setDataAtCell(i, 3, null);
           this.hot.setCellMeta(i, 3, 'source', ['yellow_1', 'yellow_2', 'yellow_b']);
+
+          this.hot.setDataAtCell(i, 4, null);
+          this.hot.setCellMeta(i, 4, 'source', [{ id: 0, name: 'y_1' }, { id: 1, name: 'y_2' }, { id: 2, name: 'y_b' }]);
         }
       }
 
